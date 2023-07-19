@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Shifting Text</title>
+    <style>
+      body {
+        background-color: black;
+        color: green;
+        font-size: 20px;
+        font-family: monospace;
+      }
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="shifting-text"></div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const shiftingText = document.getElementById('shifting-text');
+        const link = 'CRYPTOSYNAPSE.RU'; // Replace with your desired link (uppercase)
+
+        // Function to generate a random lowercase alphanumeric character
+        function generateRandomChar() {
+          const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          return characters[randomIndex];
+        }
+
+        // Function to generate the shifting text
+        function generateShiftingText() {
+          const screenWidth = window.innerWidth;
+          const screenHeight = window.innerHeight;
+          const textLength = screenWidth * screenHeight / 20; // Adjust the length of the shifting text as needed
+          let shiftingTextContent = '';
+
+          for (let i = 0; i < textLength; i++) {
+            shiftingTextContent += generateRandomChar();
+          }
+
+          // Replace a random position in the shifting text with the link in uppercase
+          const randomPosition = Math.floor(Math.random() * textLength);
+          shiftingTextContent = shiftingTextContent.slice(0, randomPosition) + link + shiftingTextContent.slice(randomPosition + link.length);
+
+          shiftingText.textContent = shiftingTextContent;
+        }
+
+        // Generate the initial shifting text
+        generateShiftingText();
+
+        // Set interval to generate a new shifting text every 1 second (adjust as needed)
+        setInterval(() => {
+          generateShiftingText();
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
